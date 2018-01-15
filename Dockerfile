@@ -1,38 +1,14 @@
-FROM rightctrl/centos
-MAINTAINER RightCtrl <AI@RightCtrl.com>
+FROM rightctrl/java:8
+MAINTAINER RightCtrl <support@RightCtrl.com>
 
-# Install prepare infrastructure
-RUN yum -y update && \
-        yum -y install wget && \
-        yum -y install tar
-RUN yum -y install gcc gcc-c++ make flex bison gperf ruby \
-openssl-devel freetype-devel fontconfig-devel libicu-devel sqlite-devel \
-libpng-devel libjpeg-devel
+
+ENV CATALINA_HOME /opt/tomcat
+ENV PATH $PATH:$CATALINA_HOME/bin:$CATALINA_HOME/scripts
+
 RUN rpm -Uvh https://rpm.nodesource.com/pub_4.x/el/7/x86_64/nodesource-release-el7-1.noarch.rpm
 RUN yum install -y nodejs
-RUN yum -y update
 RUN npm install -g grunt-cli
 RUN npm install -g grunt
-#added fonts
-RUN yum -y install google-*fonts
-RUN yum -y -q reinstall glibc-common && locale -a
-# Prepare environment
-ENV JAVA_HOME /opt/java
-ENV CATALINA_HOME /opt/tomcat
-ENV PATH $PATH:$JAVA_HOME/bin:$CATALINA_HOME/bin:$CATALINA_HOME/scripts
-
-# Install Oracle Java8
-RUN wget --no-check-certificate -c --header "Cookie: oraclelicense=accept-securebackup-cookie" http://download.oracle.com/otn-pub/java/jdk/8u151-b12/e758a0de34e24606bca991d704f6dcbf/jdk-8u151-linux-x64.tar.gz
-
-RUN tar xzf jdk-8u151-linux-x64.tar.gz
-RUN rm jdk*.tar.gz
-RUN mv jdk* ${JAVA_HOME}
-
-#COPY jdk1.8.0_144/* ${JAVA_HOME}/
-#RUN cd /root && \
-#    tar xzf jdk-8u144-linux-x64.tar.gz && \
-#    rm jdk*.tar.gz && \
-#    mv jdk* ${JAVA_HOME}
 
 
 # Install Tomcat
