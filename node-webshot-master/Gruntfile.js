@@ -6,7 +6,7 @@ webshot: {
 homepage: {
 options: {
 siteType: 'url',
-  site: 'http://www.xyxon.co.jp/',
+  site: 'http://bqtech.co.in/',
 savePath: './tmp/Pagename0.9072267241754811.png',
 windowSize: {
  width: 1024,
