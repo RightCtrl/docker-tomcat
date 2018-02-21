@@ -10,7 +10,7 @@ RUN rpm -Uvh https://rpm.nodesource.com/pub_4.x/el/7/x86_64/nodesource-release-e
 RUN yum install -y nodejs bzip2 git
 RUN npm install -g grunt-cli
 RUN npm install -g grunt
-RUN npm install -g phantomjs
+#RUN npm install -g phantomjs
 COPY node-webshot-master /node-webshot-master
 WORKDIR /node-webshot-master
 RUN npm install 
